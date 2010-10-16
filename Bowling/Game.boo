@@ -18,9 +18,6 @@ class Game:
 	_previousRoundPoints as int
 
 	public def Hit(p as int):
-		
-		#print p
-		
 		SetScore(p)
 		PrepareNextRound(p)
 
@@ -50,8 +47,6 @@ class Game:
 			if not _firstHit:
 				_hasStrike = false
 		
-		#print "HasStrike: ${HasStrike} FirstHit: ${_firstHit}"
-
 	def SetFirstHitForNextRound():
 		if HasStrike:
 			_firstHit = _previousRoundPoints == 10
