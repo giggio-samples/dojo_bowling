@@ -3,23 +3,40 @@ namespace Bowling
 import System
 
 class Game:
-	
-	public def Hit(p as int):
-	
-		SetScore(p)
+		
+	[getter(Score)]
+	_score as int
 
-		SetPreviousRoundPoint(p)
-		SetStrike(p)
-		SetFirstHitForNextRound()
+	_firstHit as bool = true
+
+	[getter(HasStrike)]
+	_hasStrike as bool = false
+
+	[getter(HasSpare)]
+	_hasSpare as bool = false
+
+	_previousRoundPoints as int
+
+	public def Hit(p as int):
+		
+		print p
+		
+		SetScore(p)
+		PrepareNextRound(p)
+
 
 	def SetScore(p as int):
-		if HasSpare() or HasStrike:
+		if HasSpare or HasStrike:
 			_score += p*2
+			
 		else:
-			_score += p
+			_score += p	
 
-	def SetStrike(p as int):
-		_hasStrike = true if _firstHit and p == 10
+	def PrepareNextRound(p as int): 
+		SetPreviousRoundPoint(p)
+		SetStrikeForNextRound(p)
+		SetSpareForNextRound()
+		SetFirstHitForNextRound()
 		
 	def SetPreviousRoundPoint(p as int):
 		if _firstHit:
@@ -27,17 +44,27 @@ class Game:
 		else:
 			_previousRoundPoints += p
 
+	def SetStrikeForNextRound(p as int):
+		if _firstHit and p == 10:
+			_hasStrike = true 
+		else: 
+			if not _firstHit:
+				_hasStrike = false
+
+		print HasStrike
+
 	def SetFirstHitForNextRound():
 		_firstHit = not _firstHit if not HasStrike
 		
-	def HasSpare():
-		return _previousRoundPoints==10 and _firstHit
+	def SetSpareForNextRound():
+		if not _firstHit and _previousRoundPoints == 10:
+			_hasSpare = true 
+			_hasStrike = false
+		else:
+			if _firstHit:
+				_hasSpare = false
+				
 
-	[getter(Score)]
-	_score as int
-	_firstHit as bool = true
-	[getter(HasStrike)]
-	_hasStrike as bool = false
-	_previousRoundPoints as int
+
 	
 

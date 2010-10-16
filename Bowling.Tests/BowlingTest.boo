@@ -43,7 +43,30 @@ public class BowlingTest:
 
 		game.Hit(5)
 
-		Assert.AreEqual (20, game.Score)
+		Assert.AreEqual (20, game.Score)	
+	[Test]
+	public def HitSpareAnd5And2():
+		game = Game()
+		game.Hit(1)
+		game.Hit(9)
+
+		game.Hit(5)
+		game.Hit(2)
+
+		Assert.AreEqual (22, game.Score)
+
+	[Test]
+	public def HitStrikeAnd1And2And3And4():
+		game = Game()
+		game.Hit(10)
+
+		game.Hit(1)
+		game.Hit(2)
+
+		game.Hit(3)
+		game.Hit(4)
+
+		Assert.AreEqual (23, game.Score)
 
 	[Test]
 	public def HitSpareAndSpare():
@@ -115,3 +138,18 @@ public class BowlingTest:
 		game.Hit(5)
 
 		Assert.AreEqual (40, game.Score)
+
+
+	[Test, Ignore]
+	public def HitStrikeAndSpareAnd5And2():
+		game = Game()
+		game.Hit(10)
+
+		game.Hit(1)
+		game.Hit(9)
+
+		game.Hit(5)
+		game.Hit(2)
+
+		Assert.AreEqual (42, game.Score)
+
