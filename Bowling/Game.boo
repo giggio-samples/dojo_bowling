@@ -19,7 +19,7 @@ class Game:
 
 	public def Hit(p as int):
 		
-		print p
+		#print p
 		
 		SetScore(p)
 		PrepareNextRound(p)
@@ -27,8 +27,7 @@ class Game:
 
 	def SetScore(p as int):
 		if HasSpare or HasStrike:
-			_score += p*2
-			
+			_score += p*2			
 		else:
 			_score += p	
 
@@ -50,12 +49,15 @@ class Game:
 		else: 
 			if not _firstHit:
 				_hasStrike = false
-
-		print HasStrike
+		
+		#print "HasStrike: ${HasStrike} FirstHit: ${_firstHit}"
 
 	def SetFirstHitForNextRound():
-		_firstHit = not _firstHit if not HasStrike
-		
+		if HasStrike:
+			_firstHit = _previousRoundPoints == 10
+		else:
+			_firstHit = not _firstHit 
+
 	def SetSpareForNextRound():
 		if not _firstHit and _previousRoundPoints == 10:
 			_hasSpare = true 

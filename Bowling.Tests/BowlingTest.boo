@@ -140,7 +140,7 @@ public class BowlingTest:
 		Assert.AreEqual (40, game.Score)
 
 
-	[Test, Ignore]
+	[Test]
 	public def HitStrikeAndSpareAnd5And2():
 		game = Game()
 		game.Hit(10)
